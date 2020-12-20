@@ -11,17 +11,20 @@
 
 <script>
 export default {
-    props: {
-        authors: {
-            type: Array,
-            required: true
-        }
+  props: {
+    authors: {
+      type: Array,
+      required: true
     }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
     .footer {
-        background: cyan;
+        padding: 10px;
+        border-top: 2px solid gray;
+        display: flex;
+        justify-content: center;
     }
 </style>

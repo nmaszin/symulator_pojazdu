@@ -1,12 +1,13 @@
 <template>
     <header class="header">
-        <h1 class="title">Projekt PA</h1>
+        <h1 class="title">Symulator układu regulacji prędkości</h1>
     </header>
 </template>
 
 <style lang="scss" scoped>
     .header {
-        background: yellow;
+        padding: 20px;
+        border-bottom: 2px solid grey;
     }
 
     .title {

@@ -2,7 +2,6 @@
   <Header/>
   <Main/>
   <Footer :authors="authors" />
-
 </template>
 
 <script>
@@ -30,6 +29,10 @@ export default {
 </script>
 
 <style lang="scss">
+  #app {
+    font-family: 'Roboto', sans-serif;
+  }
+
   .authors-list {
     list-style-type: none;
     margin: 0;

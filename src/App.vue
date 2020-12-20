@@ -19,9 +19,9 @@ export default {
   data() {
     return {
       authors: [
-        'Paweł Błoch (145375)',
-        'Eryk Andrzejewski (145277)',
-        'Konrad Bankiewicz (145265)'
+        'Paweł Błoch',
+        'Eryk Andrzejewski',
+        'Konrad Bankiewicz'
       ]
     }
   }

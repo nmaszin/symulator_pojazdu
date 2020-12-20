@@ -1,11 +1,6 @@
 <template>
     <footer class="footer">
-        Stronę wykonali:
-        <ul class="authors-list">
-        <li v-for="author in authors" :key="author" class="author">
-            {{ author }}
-        </li>
-        </ul>
+        Stronę wykonali: {{ authorsList }}
   </footer>
 </template>
 
@@ -16,15 +11,18 @@ export default {
       type: Array,
       required: true
     }
+  },
+  computed: {
+      authorsList() {
+        return this.authors.join(', ')
+      }
   }
 }
 </script>
 
 <style lang="scss" scoped>
     .footer {
-        padding: 10px;
-        border-top: 2px solid gray;
-        display: flex;
-        justify-content: center;
+        padding: 20px;
+        text-align: center;
     }
 </style>

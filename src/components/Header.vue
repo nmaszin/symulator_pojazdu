@@ -7,7 +7,8 @@
 <style lang="scss" scoped>
     .header {
         padding: 20px;
-        border-bottom: 2px solid grey;
+        color: white;
+        background: #444;
     }
 
     .title {

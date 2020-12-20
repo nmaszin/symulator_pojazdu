@@ -1,17 +1,12 @@
 <template>
     <div class="plots">
-        Plots
+        Tu będą wykresy
     </div>
 </template>
 
 <style lang="scss" scoped>
     .plots {
         flex: 3;
-        width: 100%;
-        height: 100%;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        overflow-y: auto;
     }
 </style>

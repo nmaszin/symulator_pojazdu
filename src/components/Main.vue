@@ -1,7 +1,7 @@
 <template>
     <main class="main">
-        <Sidebar/>
-        <Plots/>
+        <Sidebar v-model="settings" />
+        <Plots :settings="settings"/>
     </main>
 </template>
 
@@ -13,6 +13,11 @@ export default {
     components: {
         Sidebar,
         Plots
+    },
+    data() {
+        return {
+            settings: {}
+        }
     }
 }
 </script>

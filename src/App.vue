@@ -1,7 +1,9 @@
 <template>
-  <Header/>
-  <Main/>
-  <Footer :authors="authors" />
+  <div>
+    <Header/>
+    <Main/>
+    <Footer :authors="authors" />
+  </div>
 </template>
 
 <script>

@@ -16,7 +16,12 @@ export default {
     },
     data() {
         return {
-            settings: {}
+            settings: {
+                amplitude: 1,
+                frequency: 1,
+                offsetX: 0,
+                offsetY: 0
+            }
         }
     }
 }

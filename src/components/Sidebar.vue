@@ -2,22 +2,22 @@
     <div class="sidebar">
         <div class="control">
             <label class="control-label" for="amplitude">Amplituda</label>
-            <input class="control-input" id="amplitude" type="number" v-model="settings.amplitude" @input="updateSettings">
+            <input class="control-input" id="amplitude" type="number" step="0.5" v-model.number="settings.amplitude" @input="updateSettings">
         </div>
 
         <div class="control">
             <label class="control-label" for="frequency">Częstotliwość</label>
-            <input class="control-input" id="frequency" type="number" v-model="settings.frequency" @input="updateSettings">
+            <input class="control-input" id="frequency" type="number" step="0.5" v-model.number="settings.frequency" @input="updateSettings">
         </div>
 
         <div class="control">
             <label class="control-label" for="offset-x">Przesunięcie osi X</label>
-            <input class="control-input" id="offset-x" type="range" min="-3.14" max="3.14" step="0.01" v-model="settings.offsetX" @input="updateSettings">
+            <input class="control-input" id="offset-x" type="range" min="-3.14" max="3.14" step="0.01" v-model.number="settings.offsetX" @input="updateSettings">
         </div>
 
         <div class="control">
             <label class="control-label" for="offset-y">Przesunięcie osi Y</label>
-            <input class="control-input" id="offset-y" type="range" min="-3.14" max="3.14" step="0.01" v-model="settings.offsetY" @input="updateSettings">
+            <input class="control-input" id="offset-y" type="range" min="-3.14" max="3.14" step="0.01" v-model.number="settings.offsetY" @input="updateSettings">
         </div>
     </div>
 </template>
@@ -25,17 +25,16 @@
 <script>
 export default {
     props: [
-        'modelValue'
+        'value'
     ],
     data() {
         return {
-            settings: Object.assign({}, this.modelValue)
+            settings: Object.assign({}, this.value)
         }
     },
-    emits: ['update:modelValue'],
     methods: {
         updateSettings() {
-            this.$emit('update:modelValue', this.settings)
+            this.$emit('input', this.settings)
         }
     }
 }

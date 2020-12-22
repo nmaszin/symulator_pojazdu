@@ -1,7 +1,7 @@
 <template>
   <div>
-    <Header/>
-    <Main/>
+    <Header />
+    <Main />
     <Footer :authors="authors" />
   </div>
 </template>
@@ -30,10 +30,8 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
   #app {
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
     max-width: 100vw;
     min-height: 100vh;
     display: grid;

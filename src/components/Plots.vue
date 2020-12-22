@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import SinusoidePlot from '@/components/SinusoidePlot.vue'
+import SinusoidePlot from '@/components/plots/SinusoidePlot.vue'
 
 export default {
     components: {

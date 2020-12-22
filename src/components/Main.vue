@@ -1,17 +1,17 @@
 <template>
     <main class="main">
-        <Sidebar v-model="settings" />
+        <Controls v-model="settings" />
         <Plots :settings="settings"/>
     </main>
 </template>
 
 <script>
-import Sidebar from '@/components/Sidebar'
+import Controls from '@/components/Controls'
 import Plots from '@/components/Plots'
 
 export default {
     components: {
-        Sidebar,
+        Controls,
         Plots
     },
     data() {

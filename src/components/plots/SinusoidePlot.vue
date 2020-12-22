@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import LinePlot from '@/components/LinePlot'
+import LinePlot from '@/components/plots/LinePlot'
 
 function sample(callback, start, end, step) {
     let array = []

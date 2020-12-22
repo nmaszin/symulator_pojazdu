@@ -6,10 +6,13 @@
 
 <script>
 export default {
-  props: {
-    authors: {
-      type: Array,
-      required: true
+  data() {
+    return {
+      authors: [
+        'Paweł Błoch',
+        'Eryk Andrzejewski',
+        'Konrad Bankiewicz'
+      ]
     }
   },
   computed: {

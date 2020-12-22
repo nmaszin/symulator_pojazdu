@@ -5,18 +5,7 @@
 
 <script>
 import LinePlot from '@/components/plots/LinePlot'
-
-function sample(callback, start, end, step) {
-    let array = []
-    for (let x = start; x < end; x += step) {
-        array.push({
-            x,
-            y: callback(x)
-        })
-    }
-
-    return array
-}
+import { sample } from '@/utils/plots'
 
 export default {
     components: {
@@ -26,6 +15,10 @@ export default {
     data() {
         return {
             options: {
+                responsive: true,
+                tooltips: {
+                    enabled: false
+                },
                 elements: {
                     point: {
                         radius: 0

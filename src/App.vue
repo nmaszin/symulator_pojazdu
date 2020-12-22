@@ -2,7 +2,7 @@
   <div>
     <Header />
     <Main />
-    <Footer :authors="authors" />
+    <Footer />
   </div>
 </template>
 
@@ -17,15 +17,6 @@ export default {
     Header,
     Main,
     Footer
-  },
-  data() {
-    return {
-      authors: [
-        'Paweł Błoch',
-        'Eryk Andrzejewski',
-        'Konrad Bankiewicz'
-      ]
-    }
   }
 }
 </script>

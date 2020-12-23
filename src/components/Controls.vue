@@ -19,6 +19,12 @@
             <label class="control-label" for="offset-y">Przesunięcie osi Y</label>
             <input class="control-input" id="offset-y" type="range" min="-3.14" max="3.14" step="0.01" v-model.number="settings.offsetY" @input="updateSettings">
         </div>
+
+        <div class="control">
+            <button @click="switchSimulation">
+                {{ switchSimulationButtonText }}
+            </button>
+        </div>
     </div>
 </template>
 
@@ -32,9 +38,18 @@ export default {
             settings: Object.assign({}, this.value)
         }
     },
+    computed: {
+        switchSimulationButtonText() {
+            return this.settings.pause ? 'Uruchom symulację' : 'Zatrzymaj symulację'
+        }
+    },
     methods: {
         updateSettings() {
             this.$emit('input', this.settings)
+        },
+        switchSimulation() {
+            this.settings.pause = !this.settings.pause
+            this.updateSettings()
         }
     }
 }

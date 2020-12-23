@@ -5,52 +5,17 @@
 
 <script>
 import LinePlot from '@/components/plots/LinePlot'
-import { sample } from '@/utils/plots'
 
 export default {
     components: {
         LinePlot
     },
     props: ['settings'],
+
+
     data() {
         return {
-            options: {
-                responsive: true,
-                tooltips: {
-                    enabled: false
-                },
-                elements: {
-                    point: {
-                        radius: 0
-                    }
-                },
-                legend: {
-                    display: false
-                },
-                title: {
-                    display: true,
-                    text: 'Wykres sinusoidy'
-                },
-                scales: {
-                    yAxes: [{
-                        type: 'linear',
-                        ticks: {
-                            min: -2,
-                            max: 2,
-                            stepSize: 0.2
-                        }
-                    }],
-                    xAxes: [{
-                        type: 'linear',
-                        ticks: {
-                            min: 0,
-                            max: 6 * Math.PI,
-                            stepSize: 0.5 * Math.PI,
-                            callback: ((_, index) => index % 2 == 0 ? `${(index / 2)} π` : `${index}/2 π`)
-                        }
-                    }]
-                }
-            }
+            simulationStart: Date.now()
         }
     },
     computed: {
@@ -64,8 +29,65 @@ export default {
                     label: 'Sinusoida',
                     borderColor: '#5a5',
                     backgroundColor: 'rgba(255, 255, 255, 0)',
-                    data: sample(this.plottedFunction, 0, 6 * Math.PI, 0.1)
+                    data: []
                 }]
+            }
+        },
+
+        options() {
+            return {
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Czas [s]'
+                        },
+                        type: 'realtime',
+                        realtime: {
+                            pause: this.settings.pause,
+                            duration: 30000,
+                            refresh: 1000,
+                            delay: 1000,
+                            onRefresh: chart => {
+                                chart.data.datasets.forEach(dataset => {
+                                    const currentDate = Date.now()
+                                    dataset.data.push({
+                                        x: currentDate,
+                                        y: Math.random()
+                                    })
+                                })
+                            }
+                        },
+                        ticks: {
+                            callback: (date, index, values) => {
+                                return Math.floor((values[index].value - this.simulationStart) / 1000)
+                            }
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'A [m]'
+                        },
+                        ticks: {
+                            min: -2,
+                            max: 2,
+                            stepSize: 0.2
+                        }
+                    }]
+                },
+                legend: {
+                    display: false,
+                },
+                title: {
+                    display: true,
+                    text: 'Wykres pewnej prostej krzywej'
+                },
+                elements: {
+                    point: {
+                        radius: 0
+                    }
+                }
             }
         }
     }

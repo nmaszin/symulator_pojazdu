@@ -17,6 +17,7 @@ export default {
     data() {
         return {
             settings: {
+                pause: false,
                 amplitude: 1,
                 frequency: 1,
                 offsetX: 0,

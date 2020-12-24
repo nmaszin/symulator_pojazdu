@@ -6,6 +6,8 @@
         title="Przykładowy wykres"
         xLabel="Czas [ms]"
         yLabel="Wartość"
+        :yMin="-20"
+        :yMax="20"
         borderColor="#f00"
         :plottedField="plottedField"
     />

@@ -72,7 +72,7 @@ export default {
                             pause: this.settings.pause,
                             duration: this.settings.plotArea,
                             refresh: this.settings.delta,
-                            delay: this.settings.delta,
+                            delay: 0,
                             onRefresh: chart => {
                                 chart.data.datasets.forEach(dataset => {
                                     const { argument, value } = this.plottedField(this.state)

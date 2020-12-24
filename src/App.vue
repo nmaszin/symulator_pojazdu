@@ -1,21 +1,21 @@
 <template>
   <div>
     <Header />
-    <Main />
+    <SimulationManager />
     <Footer />
   </div>
 </template>
 
 <script>
 import Header from '@/components/Header'
-import Main from '@/components/Main'
+import SimulationManager from '@/components/SimulationManager'
 import Footer from '@/components/Footer'
 
 export default {
   name: 'App',
   components: {
     Header,
-    Main,
+    SimulationManager,
     Footer
   }
 }

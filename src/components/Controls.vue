@@ -1,27 +1,27 @@
 <template>
     <div class="sidebar">
         <div class="control">
-            <label class="control-label" for="amplitude">Amplituda</label>
-            <input class="control-input" id="amplitude" type="number" step="0.5" v-model.number="settings.amplitude" @input="updateSettings">
+            <label class="control-label" for="requested-velocity">Zadana prędkość [km/h]</label>
+            <Slider v-model="settings.requestedVelocity" tooltip="always" tooltipPlacement="bottom" id="requested-velocity" />
         </div>
 
         <div class="control">
-            <label class="control-label" for="frequency">Częstotliwość</label>
-            <input class="control-input" id="frequency" type="number" step="0.5" v-model.number="settings.frequency" @input="updateSettings">
+            <label class="control-label" for="terrain-gradient">Kąt nachylenia [&deg;]</label>
+            <Slider v-model="settings.terrainGradient" tooltip="always" tooltipPlacement="bottom" min=-90 max=90 id="terrain-gradient" />
         </div>
 
         <div class="control">
-            <label class="control-label" for="offset-x">Przesunięcie osi X</label>
-            <input class="control-input" id="offset-x" type="range" min="-3.14" max="3.14" step="0.01" v-model.number="settings.offsetX" @input="updateSettings">
+            <label class="control-label" for="friction-coefficient">Współczynnik tarcia kół o podłoże</label>
+            <Slider v-model="settings.frictionCoefficient" tooltip="always" tooltipPlacement="bottom" min=0 max=1 interval=0.01 id="friction-coefficient" />
         </div>
 
         <div class="control">
-            <label class="control-label" for="offset-y">Przesunięcie osi Y</label>
-            <input class="control-input" id="offset-y" type="range" min="-3.14" max="3.14" step="0.01" v-model.number="settings.offsetY" @input="updateSettings">
+            <label class="control-label" for="drag-coefficient">Współczynnik oporu aerodynamicznego</label>
+            <Slider v-model="settings.dragCoefficient" tooltip="always" tooltipPlacement="bottom" min=0 max=1 interval=0.01 id="drag-coefficient" />
         </div>
 
         <div class="control">
-            <button @click="switchSimulation">
+            <button class="button" @click="switchSimulation">
                 {{ switchSimulationButtonText }}
             </button>
         </div>
@@ -29,7 +29,13 @@
 </template>
 
 <script>
+import Slider from 'vue-slider-component'
+import 'vue-slider-component/theme/default.css'
+
 export default {
+    components: {
+        Slider
+    },
     props: [
         'value'
     ],
@@ -57,7 +63,7 @@ export default {
 
 <style lang="scss" scoped>
     .sidebar {
-        flex: 1;
+        flex: 2;
         overflow-y: auto;
 
         display: flex;
@@ -65,20 +71,26 @@ export default {
     }
 
     .control {
-        padding: 20px;
-
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
+        padding: 20px 40px;
+        text-align: center;
     }
 
     .control-label {
-        padding: 5px;
-    }
-    
-    .control-input {
-        width: 150px;
+        display: block;
+        margin: 5px;
     }
 
+    .button {
+        background: #3498db;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        transition-duration: 0.2s;
+        margin: 20px 0;
+
+        &:hover {
+            background: darken(#34db98, 10%);
+        }
+    }
 </style>

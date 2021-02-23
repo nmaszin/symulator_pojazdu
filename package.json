@@ -14,7 +14,8 @@
     "normalize.css": "^8.0.1",
     "plotly.js": "^1.58.4",
     "sass-loader": "^10.1.0",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-slider-component": "^3.2.11"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

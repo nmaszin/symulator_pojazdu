@@ -3,14 +3,39 @@
         <Controls :value="settings" @input="updateSettings" />
 
         <div class="plots">
-            <ExamplePlot :settings="settings" :state="state" />
+            <SimulationPlot
+                :state="state"
+                :plottedField="state => state.velocity"
+            
+                title="Wykres prędkości w dziedzinie czasu"
+                xLabel="Wartość prędkości [km/h]"
+                yLabel="Czas [s]"
+            />
+
+            <SimulationPlot
+                :state="state"
+                :plottedField="state => state.enginePower"
+            
+                title="Wykres mocy silnika w dziedzinie czasu"
+                xLabel="Moc silnika [W]"
+                yLabel="Czas [s]"
+            />
+
+            <SimulationPlot
+                :state="state"
+                :plottedField="state => state.brakingPower"
+            
+                title="Wykres siły hamowania w dziedzinie czasu"
+                xLabel="Siła hamowania [N]"
+                yLabel="Czas [s]"
+            />
         </div>
     </main>
 </template>
 
 <script>
 import Controls from '@/components/Controls'
-import ExamplePlot from '@/components/plots/ExamplePlot'
+import SimulationPlot from '@/components/plots/BaseSimulationPlot'
 
 import initialSettings from '@/simulation/initialSettings'
 import initialState from '@/simulation/initialState'
@@ -19,7 +44,7 @@ import update from '@/simulation/update'
 export default {
     components: {
         Controls,
-        ExamplePlot
+        SimulationPlot
     },
     data() {
         return {
@@ -58,7 +83,7 @@ export default {
 
     .plots {
         padding: 20px;
-        flex: 3;
+        flex: 5;
         overflow-y: auto;
         display: flex;
         flex-direction: column;

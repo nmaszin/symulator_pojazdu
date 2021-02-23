@@ -1,118 +1,67 @@
 <template>
-    <BaseLinePlot :chartData="initialChartData" :options="options" />
+    <VuePlotly
+        :data="plotData"
+        :layout="layout"
+        :display-mode-bar="true"
+    />
 </template>
 
 <script>
-import BaseLinePlot from '@/components/plots/BaseLinePlot'
+import VuePlotly from '@statnett/vue-plotly'
 
 export default {
     components: {
-        BaseLinePlot
+        VuePlotly
     },
     props: {
-        settings: {
+        state: {
             type: Object,
             required: true
         },
-        state: {
-            type: Object,
-            required: true   
-        },
-        title: String,
-        xLabel: String,
-        yLabel: String,
-        yMin: Number,
-        yMax: Number,
-        borderColor: {
-            type: String,
-            default: '#5a5'
-        },
-        backgroundColor: {
-            type: String,
-            default: 'rgba(255, 255, 255, 0)'
-        },
-
         plottedField: {
             type: Function,
             required: true
         },
-        timestampToArgument: {
-            type: Function,
-            default: (timestamp, simulationStart) => timestamp - simulationStart
+        title: {
+            type: String,
+            required: true
         },
-        argumentToTimestamp: {
-            type: Function,
-            default: (argument, simulationStart) => simulationStart + argument
+        xLabel: {
+            type: String,
+            required: true
+        },
+        yLabel: {
+            type: String,
+            required: true
         }
     },
     data() {
         return {
-            simulationStart: Date.now(),
-            initialChartData: {
-                datasets: [{
-                    label: self.title,
-                    borderColor: this.borderColor,
-                    backgroundColor: this.backgroundColor,
-                    data: []
-                }]
-            }
+            plotData: [{
+                x: [],
+                y: [],
+                type: 'line'
+            }]
         }
     },
     computed: {
-         options() {
+        layout() {
             return {
-                scales: {
-                    xAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: this.xLabel
-                        },
-                        type: 'realtime',
-                        realtime: {
-                            pause: this.settings.pause,
-                            duration: this.settings.plotArea,
-                            refresh: this.settings.delta,
-                            delay: 0,
-                            onRefresh: chart => {
-                                chart.data.datasets.forEach(dataset => {
-                                    const { argument, value } = this.plottedField(this.state)
-
-                                    dataset.data.push({
-                                        x: this.argumentToTimestamp(argument, this.simulationStart),
-                                        y: value
-                                    })
-                                })
-                            }
-                        },
-                        ticks: {
-                            callback: (value, index, values) => this.timestampToArgument(values[index].value, this.simulationStart)
-                        }
-                    }],
-                    yAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: this.yLabel
-                        },
-                        ticks: {
-                            min: this.yMin,
-                            max: this.yMax,
-                            stepSize: (this.yMax - this.yMin) / 10
-                        }
-                    }]
+                title: this.title,
+                xaxis: {
+                    title: this.xLabel
                 },
-                legend: {
-                    display: false,
+                yaxis: {
+                    title: this.yLabel
                 },
-                title: {
-                    display: true,
-                    text: this.title
-                },
-                elements: {
-                    point: {
-                        radius: 0
-                    }
-                }
             }
+        }
+    },
+    watch: {
+        state(newState) {
+            const field = this.plottedField(newState)
+            this.plotData[0].x.push(field.argument)
+            this.plotData[0].y.push(field.value)
         }
     }
 }

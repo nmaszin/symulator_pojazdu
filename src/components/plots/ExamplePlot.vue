@@ -1,16 +1,23 @@
 
 <template>
+    <div>
     <BaseSimulationPlot
-        :settings="settings"
         :state="state"
+        :plottedField="state => ({ argument: state.value.argument / 1000, value: state.value.value })"
+    
         title="Przykładowy wykres"
-        xLabel="Czas [ms]"
+        xLabel="Czas [s]"
         yLabel="Wartość"
-        :yMin="-20"
-        :yMax="20"
-        borderColor="#f00"
-        :plottedField="plottedField"
     />
+    <BaseSimulationPlot
+        :state="state"
+        :plottedField="state => ({ argument: state.value.value, value: state.value.argument / 1000 })"
+    
+        title="Przykładowy wykres 2"
+        xLabel="Wartość"
+        yLabel="Czas [s]"
+    />
+    </div>
 </template>
 
 <script>

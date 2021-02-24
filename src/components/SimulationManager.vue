@@ -1,33 +1,19 @@
 <template>
     <main class="main">
-        <Controls :value="settings" @input="updateSettings" />
+        <Controls :value="settings" @input="updateSettings" @reset="resetSimulation" />
 
         <div class="plots">
             <SimulationPlot
-                :state="state"
-                :plottedField="state => state.velocity"
-            
-                title="Wykres prędkości w dziedzinie czasu"
-                xLabel="Wartość prędkości [km/h]"
-                yLabel="Czas [s]"
-            />
+                v-for="(plot, index) in plots"
+                :key="index"
+                ref="plots"
 
-            <SimulationPlot
                 :state="state"
-                :plottedField="state => state.enginePower"
-            
-                title="Wykres mocy silnika w dziedzinie czasu"
-                xLabel="Moc silnika [W]"
-                yLabel="Czas [s]"
-            />
 
-            <SimulationPlot
-                :state="state"
-                :plottedField="state => state.brakingPower"
-            
-                title="Wykres siły hamowania w dziedzinie czasu"
-                xLabel="Siła hamowania [N]"
-                yLabel="Czas [s]"
+                :title="plot.title"
+                :xLabel="plot.xLabel"
+                :yLabel="plot.yLabel"
+                :plottedField="plot.plottedField"
             />
         </div>
     </main>
@@ -50,7 +36,27 @@ export default {
         return {
             settings: initialSettings(),
             state: initialState(),
-            intervalHandle: null
+            intervalHandle: null,
+            plots: [
+                {
+                    title: 'Wykres prędkości w dziedzinie czasu',
+                    xLabel: 'Czas [s]',
+                    yLabel: 'Wartość prędkości [km/h]',
+                    plottedField: state => state.velocity
+                },
+                {
+                    title: 'Wykres mocy silnika w dziedzinie czasu',
+                    xLabel: 'Czas [s]',
+                    yLabel: 'Moc silnika [W]',
+                    plottedField: state => state.enginePower
+                },
+                {
+                    title: 'Wykres siły hamowania w dziedzinie czasu',
+                    xLabel: 'Czas [s]',
+                    yLabel: 'Siła hamowania [N]',
+                    plottedField: state => state.brakingPower
+                }
+            ]
         }
     },
     methods: {
@@ -70,6 +76,16 @@ export default {
             } else {
                 this.runSimulation()
             }
+        },
+        resetSimulation() {
+            if (!this.settings.pause) {
+                this.pauseSimulation()
+            }
+
+            this.settings = initialSettings()
+            this.state = initialState()
+
+            this.$refs.plots.forEach(plot => plot.reset())
         }
     }
 }

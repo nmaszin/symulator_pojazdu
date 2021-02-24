@@ -63,6 +63,15 @@ export default {
             this.plotData[0].x.push(field.argument)
             this.plotData[0].y.push(field.value)
         }
+    },
+    methods: {
+        reset() {
+            this.plotData = [{
+                x: [],
+                y: [],
+                type: 'line'
+            }]
+        }
     }
 }
 </script>

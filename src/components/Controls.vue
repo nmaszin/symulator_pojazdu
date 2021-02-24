@@ -7,22 +7,26 @@
 
         <div class="control">
             <label class="control-label" for="terrain-gradient">Kąt nachylenia [&deg;]</label>
-            <Slider v-model="settings.terrainGradient" tooltip="always" tooltipPlacement="bottom" min=-90 max=90 id="terrain-gradient" />
+            <Slider v-model="settings.terrainGradient" tooltip="always" tooltipPlacement="bottom" :min="-90" :max="90" id="terrain-gradient" />
         </div>
 
         <div class="control">
             <label class="control-label" for="friction-coefficient">Współczynnik tarcia kół o podłoże</label>
-            <Slider v-model="settings.frictionCoefficient" tooltip="always" tooltipPlacement="bottom" min=0 max=1 interval=0.01 id="friction-coefficient" />
+            <Slider v-model="settings.frictionCoefficient" tooltip="always" tooltipPlacement="bottom" :min="0" :max="1" :interval="0.01" id="friction-coefficient" />
         </div>
 
         <div class="control">
             <label class="control-label" for="drag-coefficient">Współczynnik oporu aerodynamicznego</label>
-            <Slider v-model="settings.dragCoefficient" tooltip="always" tooltipPlacement="bottom" min=0 max=1 interval=0.01 id="drag-coefficient" />
+            <Slider v-model="settings.dragCoefficient" tooltip="always" tooltipPlacement="bottom" :min="0" :max="1" :interval="0.01" id="drag-coefficient" />
         </div>
 
-        <div class="control">
+        <div class="control buttons">
             <button class="button" @click="switchSimulation">
                 {{ switchSimulationButtonText }}
+            </button>
+
+            <button class="button" @click="resetSimulation">
+                Zresetuj
             </button>
         </div>
     </div>
@@ -41,7 +45,7 @@ export default {
     ],
     data() {
         return {
-            settings: Object.assign({}, this.value)
+            settings: this.value
         }
     },
     computed: {
@@ -50,12 +54,20 @@ export default {
         }
     },
     methods: {
-        updateSettings() {
-            this.$emit('input', this.settings)
-        },
         switchSimulation() {
             this.settings.pause = !this.settings.pause
-            this.updateSettings()
+            this.$emit('input', this.settings)
+        },
+        resetSimulation() {
+            this.$emit('reset')
+        }
+    },
+    watch: {
+        value: {
+            handler(value) {
+                this.settings = value
+            },
+            deep: true
         }
     }
 }
@@ -87,10 +99,14 @@ export default {
         border-radius: 5px;
         padding: 10px;
         transition-duration: 0.2s;
-        margin: 20px 0;
+        margin: 10px;
 
         &:hover {
             background: darken(#34db98, 10%);
         }
+    }
+
+    .buttons {
+        display: flex;
     }
 </style>

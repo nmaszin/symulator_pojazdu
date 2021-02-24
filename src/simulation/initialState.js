@@ -1,19 +1,11 @@
 export default () => ({
-    // Aktualna wartość prędkości
-    velocity: {
-        argument: 0,
-        value: 0
+    // Potrzebne do regulatorów całkujących i różniczkujących
+    regulation: {
+        lastError: 0,
+        sumOfErrors: 0
     },
 
-    // Aktualna moc silnika
-    enginePower: {
-        argument: 0,
-        value: 0
-    },
-
-    // Aktualna siła hamowania
-    brakingPower: {
-        argument: 0,
-        value: 112
-    },
+    time: 0, // Punkt czasu w którym znajduje się symulacja
+    velocity: 0, // Aktualna wartość prędkości
+    enginePower: 0, // Aktualna moc silnika
 })

@@ -13,7 +13,8 @@
                 :title="plot.title"
                 :xLabel="plot.xLabel"
                 :yLabel="plot.yLabel"
-                :plottedField="plot.plottedField"
+                :argument="plot.argument"
+                :value="plot.value"
             />
         </div>
     </main>
@@ -41,30 +42,25 @@ export default {
                 {
                     title: 'Wykres prędkości w dziedzinie czasu',
                     xLabel: 'Czas [s]',
-                    yLabel: 'Wartość prędkości [km/h]',
-                    plottedField: state => state.velocity
+                    yLabel: 'Wartość prędkości [m/s]',
+                    argument: state => state.time,
+                    value: state => state.velocity
                 },
                 {
                     title: 'Wykres mocy silnika w dziedzinie czasu',
                     xLabel: 'Czas [s]',
                     yLabel: 'Moc silnika [W]',
-                    plottedField: state => state.enginePower
+                    argument: state => state.time,
+                    value: state => state.enginePower
                 },
-                {
-                    title: 'Wykres siły hamowania w dziedzinie czasu',
-                    xLabel: 'Czas [s]',
-                    yLabel: 'Siła hamowania [N]',
-                    plottedField: state => state.brakingPower
-                }
             ]
         }
     },
     methods: {
         runSimulation() {
-            // value w this.state jest NaN
             this.intervalHandle = setInterval(() => {
                 this.state = update(this.state, this.settings)
-            }, this.settings.delta)
+            }, this.settings.delta * 1000)
         },
         pauseSimulation() {
             clearInterval(this.intervalHandle)

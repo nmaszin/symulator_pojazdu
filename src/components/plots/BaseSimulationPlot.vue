@@ -18,7 +18,11 @@ export default {
             type: Object,
             required: true
         },
-        plottedField: {
+        argument: {
+            type: Function,
+            required: true
+        },
+        value: {
             type: Function,
             required: true
         },
@@ -59,9 +63,8 @@ export default {
     },
     watch: {
         state(newState) {
-            const field = this.plottedField(newState)
-            this.plotData[0].x.push(field.argument)
-            this.plotData[0].y.push(field.value)
+            this.plotData[0].x.push(this.argument(newState))
+            this.plotData[0].y.push(this.value(newState))
         }
     },
     methods: {

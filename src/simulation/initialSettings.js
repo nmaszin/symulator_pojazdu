@@ -4,8 +4,8 @@ export default () => ({
 
     requestedVelocity: 0, // Zadana prędkość
     terrainGradient: 0, // Nachylenie podłoża w stopniach, dodatnia wartość oznacza podjazd, ujemna - zjazd
-    frictionCoefficient: 0.2, // Współczynnik tarcia kół o podłoże
-    dragCoefficient: 0.3, // Współczynnik oporu aerodynamicznego
+    maxBrakingAcceleration: 0.5, // Maksymalna siła hamowania, wyrażana w G (krotność przyspieszenia grawitacyjnego)
+    dragCoefficient: 0, // Współczynnik oporu aerodynamicznego
 
     maxEnginePower: 100_000, // maksymalna moc silnika wyrażana w watach
     vehicleMass: 1700, // Masa pojazdu w kilogramach

@@ -51,14 +51,14 @@ export default {
                     xLabel: 'Czas [s]',
                     yLabel: 'Moc silnika [W]',
                     argument: state => state.time,
-                    value: state => state.enginePower
+                    value: state => state.engine.power
                 },
                 {
                     title: 'Uchyb regulacji w dziedzinie czasu',
                     xLabel: 'Czas [s]',
                     yLabel: 'Uchyb regulacji prędkości [m/s]',
                     argument: state => state.time,
-                    value: state => this.settings.requestedVelocity - state.velocity
+                    value: state => state.controlError
                 },
             ]
         }

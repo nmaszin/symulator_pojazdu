@@ -3,6 +3,7 @@ export default () => ({
     velocity: 0, // Aktualna wartość prędkości
 
     lastError: 0,
+    controlError: 0,
     sumOfErrors: 0,
     engine: {
         controllerOutput: 0,

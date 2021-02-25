@@ -1,20 +1,21 @@
-import controlError from '@/simulation/controlError'
+import controlError from '@/simulation/regulators/controlError'
+import regulator from '@/simulation/regulators/regulator'
 
-import pidRegulator from '@/simulation/regulators/pid'
-import engine from '@/simulation/engine'
+import engine from '@/simulation/elements/engine'
+// import brake from '@/simulation/elements/brake'
 
 import gravity from '@/simulation/inferences/gravity'
 import friction from '@/simulation/inferences/friction'
 import windResistance from '@/simulation/inferences/windResistance'
 
-
 export default function update(state, settings) {
     const routines = [
         controlError,
-        (state, settings) => pidRegulator('engine', state, settings),
-        (state, settings) => pidRegulator('brake', state, settings),
+        regulator('engine'),
+        regulator('brake'),
+
         engine,
-        gravity,
+        //brake,
 
         friction,
         gravity,

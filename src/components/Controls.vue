@@ -4,23 +4,28 @@
             <h2 class="controls-group-title">Dane symulacji</h2>
             
             <div class="control">
-                <label class="control-label" for="requested-velocity">Zadana prędkość [km/h]</label>
+                <label class="control-label" for="requested-velocity">Zadana prędkość [m/s]</label>
                 <Slider v-model="settings.requestedVelocity" tooltip="always" tooltipPlacement="bottom" id="requested-velocity" />
             </div>
 
             <div class="control">
                 <label class="control-label" for="vehicle-mass">Masa pojazdu [kg]</label>
-                <input type="number" v-model="settings.vehicleMass" id="vehicle-mass" >
+                <input type="number" v-model.number="settings.vehicleMass" id="vehicle-mass" >
             </div>
 
             <div class="control">
                 <label class="control-label" for="max-engine-power">Maksymalna moc silnika [kW]</label>
-                <input type="number" v-model="settings.maxEnginePower" id="max-engine-power" >
+                <input type="number" v-model.number="settings.maxEnginePower" id="max-engine-power" >
+            </div>
+
+            <div class="control">
+                <label class="control-label" for="max-braking-acceleration">Maksymalne przeciążenie podczas hamowania [G]</label>
+                <input type="number" step="0.01" v-model.number="settings.maxBrakingAcceleration" id="max-braking-acceleration" >
             </div>
 
             <div class="control">
                 <label class="control-label" for="gravity-acceleration">Przyspieszenie grawitacyjne</label>
-                <input type="number" step="0.01" v-model="settings.gravityAcceleration" id="gravity-acceleration" >
+                <input type="number" step="0.01" v-model.number="settings.gravityAcceleration" id="gravity-acceleration" >
             </div>
 
             <div class="control">
@@ -55,17 +60,17 @@
 
             <div class="control">
                 <label class="control-label" for="proportional-gain">Wzmocnienie regulatora</label>
-                <input type="number" step="0.01" v-model="settings.engine.proportionalGain" id="proportional-gain" >
+                <input type="number" step="0.01" v-model.number="settings.engine.proportionalGain" id="proportional-gain" >
             </div>
 
             <div class="control" v-show="settings.engine.regulatorType.includes('d')">
                 <label class="control-label" for="derivative-time">Czas wyprzedzenia</label>
-                <input type="number" step="0.01" v-model="settings.engine.derivativeTime" id="derivative-time" >
+                <input type="number" step="0.01" v-model.number="settings.engine.derivativeTime" id="derivative-time" >
             </div>
             
             <div class="control" v-show="settings.engine.regulatorType.includes('i')">
                 <label class="control-label" for="integral-time">Czas zdwojenia</label>
-                <input type="number" step="0.01" v-model="settings.engine.integralTime" id="integral-time" >
+                <input type="number" step="0.01" v-model.number="settings.engine.integralTime" id="integral-time" >
             </div>
         </div>
 
@@ -84,17 +89,17 @@
 
             <div class="control">
                 <label class="control-label" for="proportional-gain">Wzmocnienie regulatora</label>
-                <input type="number" step="0.01" v-model="settings.brake.proportionalGain" id="proportional-gain" >
+                <input type="number" step="0.01" v-model.number="settings.brake.proportionalGain" id="proportional-gain" >
             </div>
 
             <div class="control" v-show="settings.brake.regulatorType.includes('d')">
                 <label class="control-label" for="derivative-time">Czas wyprzedzenia</label>
-                <input type="number" step="0.01" v-model="settings.brake.derivativeTime" id="derivative-time" >
+                <input type="number" step="0.01" v-model.number="settings.brake.derivativeTime" id="derivative-time" >
             </div>
             
             <div class="control" v-show="settings.brake.regulatorType.includes('i')">
                 <label class="control-label" for="integral-time">Czas zdwojenia</label>
-                <input type="number" step="0.01" v-model="settings.brake.integralTime" id="integral-time" >
+                <input type="number" step="0.01" v-model.number="settings.brake.integralTime" id="integral-time" >
             </div>
         </div>
 
@@ -104,7 +109,7 @@
 
             <div class="control">
                 <label class="control-label" for="delta">Czas próbkowania</label>
-                <input type="number" step="0.01" min="0.05" max="0.4" v-model="settings.delta" id="delta" >
+                <input type="number" step="0.01" min="0.05" v-model.number="settings.delta" id="delta" >
             </div>
         </div>
 

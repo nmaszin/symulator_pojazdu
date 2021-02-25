@@ -39,13 +39,23 @@
             </div>
 
             <div class="control">
-            <label class="control-label" for="friction-coefficient">Współczynnik tarcia kół o podłoże</label>
+                <label class="control-label" for="friction-coefficient">Współczynnik tarcia kół o podłoże</label>
                 <Slider v-model="settings.frictionCoefficient" tooltip="always" tooltipPlacement="bottom" :min="0" :max="1" :interval="0.01" id="friction-coefficient" />
             </div>
 
             <div class="control">
-            <label class="control-label" for="drag-coefficient">Współczynnik oporu aerodynamicznego</label>
+                <label class="control-label" for="drag-coefficient">Współczynnik oporu aerodynamicznego Cx</label>
                 <Slider v-model="settings.dragCoefficient" tooltip="always" tooltipPlacement="bottom" :min="0" :max="1" :interval="0.01" id="drag-coefficient" />
+            </div>
+
+            <div class="control">
+                <label class="control-label" for="frontal-surface">Powierzchnia czołowa pojazdu [m^2]</label>
+                <input v-model="settings.frontalSurface" :min="0" :interval="0.01" id="frontal-surface" />
+            </div>
+
+            <div class="control">
+                <label class="control-label" for="medium-density">Gęstość ośrodka [kg/m^3]</label>
+                <input v-model="settings.mediumDensity" :min="0" :interval="0.01" id="medium-density" />
             </div>
         </div>
 

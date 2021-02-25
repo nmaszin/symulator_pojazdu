@@ -1,10 +1,20 @@
+import { cutOff } from '@/simulation/utils'
+
 export default (state, settings) => {
-    // TODO: hamowanie powinno odbywać się wyłącznie w celu zmniejszenia prędkości!
-    const brakingAcceleration = state.controllerOutput * settings.maxBrakingAcceleration * settings.gravityAcceleration
-    const velocity = state.velocity - brakingAcceleration * settings.delta * 0
+    const brakingAcceleration = cutOff(
+        state.brake.controllerOutput * settings.maxBrakingAcceleration * settings.gravityAcceleration,
+        settings.minBrakingAcceleration,
+        settings.maxBrakingAcceleration
+    )
+
+    const velocity = state.velocity - brakingAcceleration * settings.delta
 
     return {
         ...state,
-        velocity
+        velocity,
+        brake: {
+            ...state.brake,
+            acceleration: brakingAcceleration
+        }
     }
 }

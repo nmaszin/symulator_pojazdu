@@ -1,6 +1,6 @@
 export default (state, settings) => {
-    let velocity = state.velocity - settings.dragCoefficient * state.velocity ** 2
-    velocity = velocity > 0 ? velocity : 0
+    const velocityDecrease = settings.dragCoefficient * state.velocity ** 2
+    const velocity = Math.max(Math.abs(state.velocity) - velocityDecrease, 0) * Math.sign(state.velocity)
 
     return {
         ...state,

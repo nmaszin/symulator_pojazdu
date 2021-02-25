@@ -54,6 +54,13 @@ export default {
                     value: state => state.engine.power
                 },
                 {
+                    title: 'Wykres siły hamowania w dziedzinie czasu',
+                    xLabel: 'Czas [s]',
+                    yLabel: 'Siła hamowania [N]',
+                    argument: state => state.time,
+                    value: state => state.brake.acceleration * this.settings.vehicleMass
+                },
+                {
                     title: 'Uchyb regulacji w dziedzinie czasu',
                     xLabel: 'Czas [s]',
                     yLabel: 'Uchyb regulacji prędkości [m/s]',

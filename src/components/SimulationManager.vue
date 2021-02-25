@@ -53,6 +53,13 @@ export default {
                     argument: state => state.time,
                     value: state => state.enginePower
                 },
+                {
+                    title: 'Uchyb regulacji w dziedzinie czasu',
+                    xLabel: 'Czas [s]',
+                    yLabel: 'Uchyb regulacji prędkości [m/s]',
+                    argument: state => state.time,
+                    value: state => this.settings.requestedVelocity - state.velocity
+                },
             ]
         }
     },

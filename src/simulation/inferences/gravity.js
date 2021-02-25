@@ -1,3 +1,7 @@
-export default (velocity, _state, settings) => {
-    return velocity - settings.delta * settings.gravityAcceleration * Math.sin(settings.terrainGradient)
+export default (state, settings) => {
+    const velocity = state.velocity - settings.delta * settings.gravityAcceleration * Math.sin(settings.terrainGradient)
+    return {
+        ...state,
+        velocity
+    }
 }

@@ -1,25 +1,32 @@
+import controlError from '@/simulation/controlError'
+
 import pidRegulator from '@/simulation/regulators/pid'
 import engine from '@/simulation/engine'
+
 import gravity from '@/simulation/inferences/gravity'
 import friction from '@/simulation/inferences/friction'
+import windResistance from '@/simulation/inferences/windResistance'
 
 
 export default function update(state, settings) {
-    const controlError = settings.requestedVelocity - state.velocity
-    const controllerOutput = pidRegulator(controlError, state, settings)
-    let { enginePower, velocity } = engine(controllerOutput, state, settings)
+    const routines = [
+        controlError,
+        (state, settings) => pidRegulator('engine', state, settings),
+        (state, settings) => pidRegulator('brake', state, settings),
+        engine,
+        gravity,
 
-    velocity = gravity(velocity, state, settings)
-    velocity = friction(velocity, state, settings)
+        friction,
+        gravity,
+        windResistance
+    ]
+
+    for (const routine of routines) {
+        state = routine(state, settings)
+    }
 
     return {
-        regulation: {
-            lastError: controlError,
-            sumOfErrors: state.regulation.sumOfErrors + controlError
-        },
-
-        time: state.time + settings.delta,
-        velocity,
-        enginePower
+        ...state,
+        time: state.time + settings.delta
     }
 }

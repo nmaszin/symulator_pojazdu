@@ -1,22 +1,15 @@
-export default (controlerOutput, state, settings) => {
-    const limitedControllerOutput = (() => {
-        const lowerBound = 0
-        const upperBound = 1
+import { cutOff } from '@/simulation/utils'
 
-        if (controlerOutput > upperBound) {
-            return upperBound
-        } else if (controlerOutput < lowerBound) {
-            return lowerBound
-        } else {
-            return controlerOutput
-        }
-    })()
-
-    const enginePower = settings.maxEnginePower * limitedControllerOutput
-    const velocity = (state.velocity + Math.sqrt(Math.pow(state.velocity, 2) + 4 * enginePower * settings.delta / settings.vehicleMass)) / 2
+export default (state, settings) => {
+    const limitedControllerOutput = cutOff(state.engine.controlerOutput, 0, 1)
+    const power = settings.maxEnginePower * limitedControllerOutput
+    const velocity = (state.velocity + Math.sqrt(Math.pow(state.velocity, 2) + 4 * power * settings.delta / settings.vehicleMass)) / 2
 
     return {
-        enginePower,
-        velocity
+        ...state,
+        velocity,
+        engine: {
+            power
+        }
     }
 }

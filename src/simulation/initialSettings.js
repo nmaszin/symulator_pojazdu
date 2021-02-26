@@ -17,15 +17,15 @@ export default () => ({
 
     engine: {
         regulatorType: 'pi',
-        proportionalGain: 0.2, // Współczynnik k_p regulatora
+        proportionalGain: 0.15, // Współczynnik k_p regulatora
         derivativeTime: 0.1, // Czas wyprzedzenia T_d
-        integralTime: 2 // Czas zdwojenia T_i
+        integralTime: 10 // Czas zdwojenia T_i
     },
     brake: {
-        regulatorType: 'p',
-        proportionalGain: 0.006, // Współczynnik k_p regulatora
+        regulatorType: 'pi',
+        proportionalGain: 0.004, // Współczynnik k_p regulatora
         derivativeTime: 0.1, // Czas wyprzedzenia T_d
-        integralTime: 0.01, // Czas zdwojenia T_i
+        integralTime: 10, // Czas zdwojenia T_i
     },
 })
 
